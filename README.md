@@ -50,11 +50,11 @@ This command start a container with the following configurations:
 | ------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | -d                                   | Run in detached mode                                                                                |
 | -p 1521:1521                         | "Link" the port 1521 from the container to the port of the localhost 1521                           |
-| -e ORACLE_PASSWORD=<password>        | Set the environment variable <password> for the default password.[^1]                               |
+| -e ORACLE_PASSWORD=<password>        | Set the environment variable <password> for the default password.                              |
 | -v oracle-volume:/opt/oracle/oradata | Creates a volume named oracle-volume and mounts it to the path /opt/oracle/oradata in the container |
 | gvenzl/oracle-xe                     | Name of the base image                                                                              |
 
-
+Username & Password[^1] 
 
 After this, if the image is not already in you container, which if it is the first time, it wont be, it will download it and uncompress it. 
 
@@ -62,15 +62,29 @@ Then, after the container has started, we will get the *CONTAINER ID* from the c
 ```sh
 docker container ls -a
 ```
+With this identifier, we can start to operate with the container and check its status.
 
-With this identifier, we can start to operate with the container.
 
-### Login into the container
-To log into the continer we have to run the command:
+
+### Conect to the DB with SQLPLUS
+#### From the container itself:
+To start up a bash "session" in the continer we have to run the command:
 ```sh
-
+docker exec -it <containerID> bash
 ```
 
+Just run 
+```sh 
+sqlplus system/your_secure_pwd@//localhost/XEPDB1
+```
+
+#### From another software such as [DataGrip](https://www.jetbrains.com/datagrip/)
+Create a new conection to a database:
+![Configuration - DataGrip](image.png)
+
+Than fill the data with the username: ```system```and the password you specified when creating the container.
+
+![Credentials - DataGrip](image-1.png)
 
 
 [^1]: The default user is system and the password the one you entered above.
