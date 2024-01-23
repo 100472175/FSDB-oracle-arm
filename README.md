@@ -9,7 +9,7 @@ The first option is the simpler one, to have a docker image, with x86 architectu
 [LINK](x86-64-method.md)
 
 ## Option 2: Docker and ARM DB
-The second option is not yet fully tested, but it seems easier to run, but takes ages to build the continer (10m +)
+The second option is not yet fully tested, but it seems easier to run, but takes ages to build the continer (14m+ on an M1)
 [LINK](arm-method.md)
 
 
